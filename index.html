@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OWASP Top 10 for Node.js Infographic</title>
+    <title>OWASP Top 10 for Node.js</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,15 +11,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F3F4F6;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
+            scroll-behavior: smooth;
         }
         .donut-chart-container {
             position: relative;
@@ -59,68 +51,78 @@
         </header>
 
         <section class="bg-white rounded-lg shadow-md p-6 mb-12">
-            <h2 class="text-2xl font-bold text-center text-[#0047AB] mb-4">Risk Prevalence & Impact Overview</h2>
-            <p class="text-center text-gray-600 mb-6">While all risks are critical, their frequency in the wild varies. This chart illustrates a conceptual ranking of the most commonly encountered vulnerabilities.</p>
-            <div class="chart-container">
-                <canvas id="overviewChart"></canvas>
-            </div>
+            <h2 class="text-2xl font-bold text-center text-[#0047AB] mb-4">Table of Contents</h2>
+            <nav>
+                <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-center">
+                    <li><a href="#a1" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A1: Access Control</a></li>
+                    <li><a href="#a2" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A2: Crypto Failures</a></li>
+                    <li><a href="#a3" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A3: Injection</a></li>
+                    <li><a href="#a4" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A4: Insecure Design</a></li>
+                    <li><a href="#a5" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A5: Misconfiguration</a></li>
+                    <li><a href="#a6" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A6: Vulnerable Components</a></li>
+                    <li><a href="#a7" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A7: Authentication</a></li>
+                    <li><a href="#a8" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A8: Integrity Failures</a></li>
+                    <li><a href="#a9" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A9: Logging Failures</a></li>
+                    <li><a href="#a10" class="font-semibold text-gray-700 hover:text-[#0047AB] transition">A10: SSRF</a></li>
+                </ul>
+            </nav>
         </section>
 
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <main id="risks" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a1" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A1: Broken Access Control</h3>
                 <div class="card-icon text-[#C70039] mb-3">👤➡️🔑➡️👤</div>
-                <p class="text-gray-600 mb-4 flex-grow">Users can perform actions or access data beyond their permissions, often by simply manipulating a URL or an API request.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Users can perform actions or access data beyond their permissions, often by simply manipulating a URL or an API request. Attackers can exploit these flaws to view sensitive files, modify other users' data, or change access rights.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Enforce authorization checks on the server for every single request to secure resources.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a2" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A2: Cryptographic Failures</h3>
                  <div class="card-icon text-[#C70039] mb-3">🔑 ➞ plaintext</div>
-                <p class="text-gray-600 mb-4 flex-grow">Sensitive data, like passwords or user details, is stored or transmitted in plaintext or with weak, outdated encryption.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Sensitive data, like passwords or user details, is stored or transmitted in plaintext or with weak, outdated encryption. This often leads to exposure if the database is compromised, as passwords were not properly hashed and salted.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Hash and salt all passwords using a strong algorithm like bcrypt. Use TLS for data in transit.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a3" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A3: Injection</h3>
                 <div class="card-icon text-[#C70039] mb-3">📥💥</div>
-                <p class="text-gray-600 mb-4 flex-grow">User-supplied data is not sanitized and is passed directly to an interpreter (like a database), allowing malicious code execution.</p>
+                <p class="text-gray-600 mb-4 flex-grow">User-supplied data is not sanitized and is passed directly to an interpreter (like a database), allowing malicious code execution. Flaws like SQL, NoSQL, and OS injection trick the interpreter into running unintended commands.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Use parameterized queries or proven sanitization libraries. Never trust user input.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a4" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A4: Insecure Design</h3>
                 <div class="card-icon text-[#FF5733] mb-3">🏗️❓</div>
-                <p class="text-gray-600 mb-4 flex-grow">Security is not a foundational part of the application's architecture, leading to systemic, hard-to-fix vulnerabilities.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Security is not a foundational part of the application's architecture, leading to systemic, hard-to-fix vulnerabilities. This broad category covers a failure to determine what level of security design is required for the application.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Use threat modeling during the design phase and adopt secure design patterns from the start.</p>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a5" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A5: Security Misconfiguration</h3>
                 <div class="card-icon text-[#FF5733] mb-3">⚙️🔓</div>
-                <p class="text-gray-600 mb-4 flex-grow">Relying on insecure default settings, having overly permissive permissions, or showing verbose error messages that leak information.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Relying on insecure default settings, having overly permissive permissions, or showing verbose error messages that leak information. This is commonly a result of incomplete configurations, open cloud storage, and misconfigured HTTP headers.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Harden configurations, disable unused features, and use generic error messages.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a6" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A6: Vulnerable Components</h3>
-                <p class="text-gray-600 mb-4 text-center">Your app is only as strong as its weakest link. Outdated dependencies are a primary attack vector.</p>
+                <p class="text-gray-600 mb-4 text-center">Your app is only as strong as its weakest link. Outdated dependencies are a primary attack vector. If you use a library or framework with a known vulnerability, you are putting your entire application at risk.</p>
                 <div class="donut-chart-container mb-4">
                     <canvas id="dependenciesChart"></canvas>
                 </div>
@@ -130,40 +132,40 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a7" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A7: Identification & Auth Failures</h3>
                 <div class="card-icon text-[#FF5733] mb-3">🚪🗝️❌</div>
-                <p class="text-gray-600 mb-4 flex-grow">Weaknesses in user identity management, such as allowing weak passwords, not limiting login attempts, or poor session handling.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Weaknesses in user identity management, such as allowing weak passwords, not limiting login attempts, or poor session handling. This can include not invalidating session IDs on logout, making accounts vulnerable to brute-force attacks.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Enforce strong password policies, use rate limiting, and invalidate sessions on logout.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a8" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A8: Software & Data Integrity</h3>
                  <div class="card-icon text-[#900C3F] mb-3">📦✔️</div>
-                <p class="text-gray-600 mb-4 flex-grow">Relying on software or data from plugins, libraries, or CI/CD pipelines without verifying their source and integrity.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Relying on software or data from plugins, libraries, or CI/CD pipelines without verifying their source and integrity. This focuses on making assumptions related to software updates and dependencies without verifying their digital signatures.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Verify software signatures. Ensure your CI/CD pipeline pulls from secure, trusted registries.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+            <div id="a9" class="bg-white rounded-lg shadow-md p-6 flex flex-col">
                 <h3 class="font-bold text-xl text-[#0047AB] mb-2">A9: Logging & Monitoring Failures</h3>
                 <div class="card-icon text-[#900C3F] mb-3">📜🤫</div>
-                <p class="text-gray-600 mb-4 flex-grow">Insufficient logging and lack of active monitoring makes it nearly impossible to detect suspicious activity or respond to a breach in time.</p>
+                <p class="text-gray-600 mb-4 flex-grow">Insufficient logging and lack of active monitoring makes it nearly impossible to detect suspicious activity or respond to a breach in time. Without sufficient logging, it is difficult to detect a breach, understand its scope, or perform forensic analysis.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Log all security-relevant events and use monitoring tools to audit logs for anomalies.</p>
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col md:col-span-2 lg:col-span-1">
+            <div id="a10" class="bg-white rounded-lg shadow-md p-6 flex flex-col md:col-span-2 lg:col-span-3">
                  <h3 class="font-bold text-xl text-[#0047AB] mb-2">A10: Server-Side Request Forgery</h3>
                  <div class="card-icon text-[#C70039] mb-3">💻➡️❓➡️🔥</div>
-                <p class="text-gray-600 mb-4 flex-grow">An attacker tricks the server into making requests to an unintended resource, often to probe internal networks or access cloud metadata.</p>
+                <p class="text-gray-600 mb-4 flex-grow">An attacker tricks the server into making requests to an unintended resource, often to probe internal networks or access cloud metadata. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall or VPN.</p>
                 <div class="bg-gray-100 p-3 rounded-lg">
                     <h4 class="font-semibold text-gray-700">Prevention:</h4>
                     <p class="text-sm text-gray-600">Whitelist allowed domains. Never blindly make requests to user-supplied URLs.</p>
@@ -174,7 +176,7 @@
         
         <section class="bg-white rounded-lg shadow-md p-6 mt-12">
             <h2 class="text-2xl font-bold text-center text-[#0047AB] mb-6">A Secure Development Workflow</h2>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 flex-wrap">
                 <div class="flow-box">Plan & Design</div>
                 <div class="flow-arrow">→</div>
                 <div class="flow-box bg-[#FFC300] text-gray-900">Threat Model</div>
@@ -198,25 +200,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const wrapLabel = (label) => {
-                if (label.length <= 16) {
-                    return label;
-                }
-                const words = label.split(' ');
-                let lines = [];
-                let currentLine = '';
-                for (const word of words) {
-                    if ((currentLine + ' ' + word).length > 16) {
-                        lines.push(currentLine);
-                        currentLine = word;
-                    } else {
-                        currentLine = (currentLine ? currentLine + ' ' : '') + word;
-                    }
-                }
-                lines.push(currentLine);
-                return lines;
-            };
-
             const tooltipTitleCallback = (tooltipItems) => {
                 const item = tooltipItems[0];
                 let label = item.chart.data.labels[item.dataIndex];
@@ -225,59 +208,6 @@
                 }
                 return label;
             };
-
-            const defaultChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#1F2937'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#1F2937' },
-                        grid: { color: '#E5E7EB' }
-                    },
-                    x: {
-                        ticks: { color: '#1F2937' },
-                        grid: { display: false }
-                    }
-                }
-            };
-            
-            const overviewCtx = document.getElementById('overviewChart').getContext('2d');
-            const overviewLabels = [
-                'Security Misconfiguration', 'Broken Access Control', 'Vulnerable Components',
-                'Cryptographic Failures', 'Injection', 'Identification & Auth Failures',
-                'Insecure Design', 'SSRF', 'Logging Failures', 'Software Integrity'
-            ];
-            new Chart(overviewCtx, {
-                type: 'bar',
-                data: {
-                    labels: overviewLabels.map(wrapLabel),
-                    datasets: [{
-                        label: 'Conceptual Impact & Prevalence',
-                        data: [95, 90, 85, 80, 75, 70, 65, 60, 55, 50],
-                        backgroundColor: [
-                            '#C70039', '#FF5733', '#FFC300', '#900C3F',
-                            '#0047AB', '#C70039', '#FF5733', '#FFC300',
-                            '#900C3F', '#0047AB'
-                        ],
-                        borderColor: '#ffffff',
-                        borderWidth: 1
-                    }]
-                },
-                options: defaultChartOptions
-            });
 
             const dependenciesCtx = document.getElementById('dependenciesChart').getContext('2d');
             new Chart(dependenciesCtx, {
